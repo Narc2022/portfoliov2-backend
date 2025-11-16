@@ -82,3 +82,4 @@ step 7: create models.py file
     Data validation
     Serialization
 
+step 8: created schemas.py in database folder
