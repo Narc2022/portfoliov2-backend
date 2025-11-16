@@ -74,3 +74,11 @@ python -m pip install "pymongo[srv]" ## is not required in newer versions (like 
 <!-- End before connect mongo db we have to run in command -->
 
 step 5: created configrations and added config code
+step 6: database folder created
+step 7: create models.py file
+    In FastAPI, “models” usually mean Pydantic models, which define the structure of data for:
+    Request bodies (input)
+    Response models (output)
+    Data validation
+    Serialization
+
