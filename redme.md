@@ -1,11 +1,11 @@
-<!-- create our py envornment -->
-python3 -m venv venv 
+step 1:<!-- create our py envornment -->
+ python3 -m venv venv 
 
-<!-- activated the environment -->
+step 2:<!-- activated the environment -->
 source venv/bin/activate or
 venv\Scripts\activate
 
-<!-- Library installed -->
+step 3:<!-- Library installed -->
 pip install fastapi uvicon pymongo
 
 ✅ FastAPI + Uvicorn + PyMongo — What They Are Used For
@@ -68,7 +68,9 @@ users.insert_one({"name": "Sachin"})
 
 <!--End libray installed -->
 
-<!-- before connect mongo db we have to run in command -->
+step 4:<!-- before connect mongo db we have to run in command -->
 python -m pip install "pymongo[srv]" ## is not required in newer versions (like 4.15.4):
 
 <!-- End before connect mongo db we have to run in command -->
+
+step 5: created configrations and added config code
