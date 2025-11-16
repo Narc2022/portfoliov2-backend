@@ -67,3 +67,8 @@ users = db["users"]
 users.insert_one({"name": "Sachin"})
 
 <!--End libray installed -->
+
+<!-- before connect mongo db we have to run in command -->
+python -m pip install "pymongo[srv]" ## is not required in newer versions (like 4.15.4):
+
+<!-- End before connect mongo db we have to run in command -->
