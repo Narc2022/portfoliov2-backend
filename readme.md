@@ -82,6 +82,6 @@ step 7: create models.py file
     Data validation
     Serialization
 
-step 8: created schemas.py in database folder
+step 8: created schemas.py in database folder.
 
-step 9: created two function in schema
+step 9: created two function in schema. now we are all set to wright api.
