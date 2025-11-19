@@ -2,7 +2,7 @@
 def individual_data(todo):
     return {
         "id": str(todo["_id"]), #as mongodb store data in object so here we typcaste id to string
-        "title": todo["name"],
+        "title": todo["title"],
         "description": todo["description"],
         "status": todo["is_completed"]
     }
