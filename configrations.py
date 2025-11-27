@@ -8,3 +8,4 @@ client = MongoClient(uri, server_api=ServerApi('1'))
 
 db = client.codeaidb
 collection = db["codeaidb_data"]
+user_collection = db["users"]

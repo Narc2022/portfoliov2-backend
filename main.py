@@ -7,13 +7,15 @@ from datetime import datetime
 
 app = FastAPI()
 router = APIRouter()
+# auth
 
-@router.get("/v1/api")
+# todos
+@router.get("/todos")
 async def get_all_todos():
     data = collection.find()
     return all_tasks(data)
 
-@router.post("/v1/api")
+@router.post("/todos")
 async def create_task(new_task:Todo):
     try:
         resp = collection.insert_one(dict(new_task))
@@ -21,7 +23,7 @@ async def create_task(new_task:Todo):
     except Exception as e:
         return HTTPException(status_code=500, detail=f"Some error occured {e}")
 
-@router.put("/v1/api/{task_id}")
+@router.put("/todos/{task_id}")
 async def update_task(task_id:str,updated_task:Todo):
     try:
         id = ObjectId(task_id)
