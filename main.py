@@ -20,6 +20,7 @@ def register_user(data: RegisterModel):
     user_data = {
         "username": data.username,
         "email":data.email,
+        "mobile":data.mobile,
         "password":hashed_pwd
     }
     
