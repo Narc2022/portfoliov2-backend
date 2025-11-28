@@ -1,13 +1,48 @@
 from fastapi import FastAPI, APIRouter, HTTPException
-from configrations import collection
+from configrations import collection,user_collection
 from database.schemas import all_tasks
-from database.models import Todo
+from database.models import Todo,RegisterModel,LoginModel
+from auth import hash_password, verify_password,create_access_token
 from bson.objectid import ObjectId
 from datetime import datetime
 
 app = FastAPI()
 router = APIRouter()
+
 # auth
+# ----------------- Register API -----------------
+def register_user(data: RegisterModel):
+    if user_collection.find_one({"username":data.username}):
+        raise HTTPException(status_code=400, detail="Username already exists")
+    
+    hashed_pwd = hash_password(data.password)
+    
+    user_data = {
+        "username": data.username,
+        "email":data.email,
+        "password":hashed_pwd
+    }
+    
+    user_collection.insert_one(user_data)
+    return {"message" : "User registered successfully"}
+
+# ------------------ Login API ------------------
+def login_user(data:LoginModel):
+    user = user_collection.find_one({"username":data.username})
+    
+    if not user:
+        raise HTTPException(status_code=401, detail="Invalid username or password")
+    
+    if not verify_password(data.password, user["password"]):
+        raise HTTPException(status_code=401, detail="Invalid username or password")
+    
+    token = create_access_token({"username": data.username})
+    
+    return {
+        "message" : "Login successful",
+        "access_token" : token
+    }
+
 
 # todos
 @router.get("/todos")

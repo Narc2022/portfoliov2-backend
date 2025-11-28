@@ -7,5 +7,5 @@ uri = "mongodb+srv://eduCode:eduCodeAI243$$$@codeai.2ablb2s.mongodb.net/?appName
 client = MongoClient(uri, server_api=ServerApi('1'))
 
 db = client.codeaidb
-collection = db["codeaidb_data"]
+collection = db["todos"]
 user_collection = db["users"]
