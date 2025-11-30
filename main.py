@@ -11,6 +11,7 @@ router = APIRouter()
 
 # auth
 # ----------------- Register API -----------------
+@router.post("/register")
 def register_user(data: RegisterModel):
     if user_collection.find_one({"username":data.username}):
         raise HTTPException(status_code=400, detail="Username already exists")
@@ -28,6 +29,7 @@ def register_user(data: RegisterModel):
     return {"message" : "User registered successfully"}
 
 # ------------------ Login API ------------------
+@router.post("/login")
 def login_user(data:LoginModel):
     user = user_collection.find_one({"username":data.username})
     
