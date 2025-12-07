@@ -11,6 +11,14 @@ class RegisterModel(BaseModel):
 class LoginModel(BaseModel):
     username:str
     password:str
+    
+
+class ForgotPasswordRequest(BaseModel):
+    email:EmailStr
+    
+class ResetPasswordRequest(BaseModel):
+    token:str
+    new_password:str    
 
 # user models
 class Todo(BaseModel):

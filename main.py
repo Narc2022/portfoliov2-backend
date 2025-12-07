@@ -1,8 +1,8 @@
-from fastapi import FastAPI, APIRouter, HTTPException
+from fastapi import FastAPI, APIRouter, HTTPException, BackgroundTasks
 from configrations import collection,user_collection
 from database.schemas import all_tasks
-from database.models import Todo,RegisterModel,LoginModel
-from auth import hash_password, verify_password,create_access_token
+from database.models import Todo,RegisterModel,LoginModel,ForgotPasswordRequest,ResetPasswordRequest
+from utils.auth import hash_password, verify_password,create_access_token,verify_reset_token,create_reset_token
 from bson.objectid import ObjectId
 from datetime import datetime
 
@@ -45,6 +45,39 @@ def login_user(data:LoginModel):
         "message" : "Login successful",
         "access_token" : token
     }
+    
+
+# @router.post("/forgot-password")
+# async def forgot_password(request: ForgotPasswordRequest, background_tasks: BackgroundTasks):
+#     # Check if user exists in DB
+#     user = fake_users_db.get(request.email)  # replace with DB query
+#     if not user:
+#         raise HTTPException(status_code=404, detail="User not found")
+
+#     reset_token = create_reset_token(request.email)
+
+#     # Send reset email in background
+#     reset_link = f"http://localhost:3000/reset-password?token={reset_token}"
+#     background_tasks.add_task(send_reset_email, request.email, reset_link)
+
+#     return {"message": "Password reset link sent"}
+
+# @router.post("/reset-password")
+# async def reset_password(request: ResetPasswordRequest):
+#     email = verify_reset_token(request.token)
+
+#     if not email:
+#         raise HTTPException(status_code=400, detail="Invalid or expired token")
+
+#     # Fetch user by email
+#     user = fake_users_db.get(email)  # replace with DB query
+#     if not user:
+#         raise HTTPException(status_code=404, detail="User not found")
+
+#     # Update password
+#     user["password"] = hash_password(request.new_password)
+    
+#     return {"message": "Password updated successfully"}
 
 
 # todos

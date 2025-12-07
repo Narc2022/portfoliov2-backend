@@ -5,6 +5,7 @@ from jose import jwt
 SECRET_KEY = "TINBEJCINSO14641SD649EE64F5E4FEEF8N"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60
+RESET_TOKEN_EXPIRE_MINUTES = 15
 
 # ------------------------- Password Hashing -------------------------
 def hash_password(password:str) -> str:
@@ -19,3 +20,15 @@ def create_access_token(data:dict):
     expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     to_encode.update({"exp": expire})
     return jwt.encode(to_encode,SECRET_KEY,algorithm=ALGORITHM)
+
+def create_reset_token(email:str):
+    expire = datetime.utcnow() + timedelta(minutes=RESET_TOKEN_EXPIRE_MINUTES)
+    payload = {"sub": email, "exp": expire}
+    return jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
+
+def verify_reset_token(token:str):
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        return payload["sub"]
+    except:
+        return None
